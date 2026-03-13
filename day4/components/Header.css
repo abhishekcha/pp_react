@@ -1,0 +1,11 @@
+header{
+    background-color: thistle;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: center;
+}
+header a{
+    color: crimson;
+    font-size: 1.5rem;
+}
