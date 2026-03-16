@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-const App=()=>{
-  const [monitor,remote]=useState();
-  const handleSearch=(e)=>{
-    const val=e.target.value;
-    remote(val);
+const App = () => {
+  const [counter, setCounter] = useState(0);
+  const handleIncre = () => {
+    // setCounter(counter+1);
+    setCounter((prev)=>{
+      return prev+1;
+    })
   }
-  return(
-    <div>
-      <h2>Hello Shruti</h2>
-      <input type="text" onKeyUp={handleSearch} />
-      <h2>{monitor}</h2>
-    </div>
-  )
-}
+    return (
+      <div>
+        <h1>{counter}</h1>
+        <button onClick={handleIncre}>++</button>
+      </div>
+    );
+  };
 export default App;
