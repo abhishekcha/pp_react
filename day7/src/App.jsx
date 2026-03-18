@@ -1,37 +1,37 @@
-const App=()=>{
-  const handleSubmit=(e)=>{
+import { useState } from "react";
+const App = () => {
+  const [fruit, setFruit] = useState([]);
+  const handleFruit = (e) => {
     e.preventDefault();
-
-    const name=e.target.username.value;
-    const city=e.target.city.value;
-    const email=e.target.email.value;
-    if(name.length<=2){
-      alert("invalid name");
-    }else if(city.length<=1){
-      alert("invalid city")
-    }else if(email.length<5){
-      alert("invalid email")
-    }else{
-      alert("success")
-    }
+    const fruitName = e.target.fruitName.value;
+    console.log(e);
+    
+    setFruit((prev) => {
+      const newArr = [...prev];
+      newArr.push(fruitName);
+      return newArr;
+    });
   };
-  return(
+  return (
     <div>
-      {
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input type="text" name="username" required />
-          </div>
-          <div>
-            <input type="email" name="email" required />
-          </div>
-          <div>
-            <input type="text" name="city" required />
-          </div>
-          <button>submit</button>
-        </form>
-      }
+      <form onSubmit={handleFruit}>
+        <input type="text" placeholder="fruit_name" name="fruitName" required />
+        <br />
+        <br />
+        <button>Submit</button>
+      </form>
+      <div>
+        {
+          fruit.map((ele)=>{
+            return(
+              <div key={ele}>
+                <p>{ele}</p>
+              </div>
+            )
+          })
+        }
+      </div>
     </div>
-  )
-}
+  );
+};
 export default App;
