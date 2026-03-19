@@ -1,23 +1,33 @@
-import { useEffect, useState } from "react";
-
+import { useState,useEffect} from "react";
 const App=()=>{
-  const [count,setCount]=useState(0);
-  console.log("component re-render");
-  useEffect(()=>{
-    console.log("hello shruti");
-    return ()=>{
-      console.log("GoodDay",count);
-      
+  const [recipesArr,setRecipesArr]= useState([]);
+  const getData=async()=>{
+    try {
+      const response=await fetch("https://dummyjson.com/recipes");
+      const data=await response.json();
+      console.log(data.recipes);
+      setRecipesArr(data.recipes);
+    } catch (error) {
+      alert(`Api Error: ${error.message}`);
     }
-  });
+  };
+  useEffect(()=>{
+    getData();
+},[]);
   return(
-    <div className="App">
-      <h1>{count}</h1>
-      <button onClick={()=>{setCount(count+1)}}>Increment</button>
+    <div>
+      <h1>Recipes...</h1> 
+      {
+        recipesArr.map((ele)=>{
+          return(
+            <div key={ele.id}>
+              <h3>{ele.name}</h3>
+              <p>{ele.cuisine}</p>
+            </div>
+          )
+        })
+      }
     </div>
   )
 }
 export default App;
-// output is- component re-render
-// App.jsx:9 GoodDay 0
-// App.jsx:7 hello shruti
